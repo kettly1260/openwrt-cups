@@ -20,6 +20,11 @@ TARGET_LDFLAGS+=-Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 include $(INCLUDE_DIR)/package.mk
 
+define Package/cups/Default
+  URL:=http://www.cups.org/
+  SUBMENU:=Printing
+endef
+
 define Package/cups
 $(call Package/cups/Default)
   SECTION:=net

@@ -29,8 +29,14 @@ define Package/cups
 $(call Package/cups/Default)
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libusb-1.0
+  DEPENDS:=+libusb-1.0 +zlib +libpthread +libpng +libjpeg +libcups +libstdcpp
   TITLE:=Common UNIX Printing System (daemon)
+endef
+
+define Package/cups/conffiles
+/etc/cups/classes.conf
+/etc/cups/cupsd.conf
+/etc/cups/printers.conf
 endef
 
 define Build/Configure

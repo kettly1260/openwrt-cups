@@ -1,17 +1,16 @@
-# This repository is no longer maintained
 
-git clone https://github.com/lede-project/source
+download https://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-sdk-19.07.3-ramips-mt7621_gcc-7.5.0_musl.Linux-x86_64.tar.xz
 
-cd source
+tar vxJf sdk.tar.xz
 
-echo "src-git cups https://github.com/Gr4ffy/lede-cups.git" >> feeds.conf.default
+cd openwrt-sdk
+
+echo "src-git cups https://github.com/fengchen-github/openwrt-cups.git" >> feeds.conf.default
 
 ./scripts/feeds update -a
 
 ./scripts/feeds install -a
 
-make menuconfig (set Network->Printing->cups as "M")
+make packages/cups/compile V=s
 
-make
-
-copy /source/bin/packages/<arch>/cups/*.ipk to machine & opkg install 
+copy bin/packages/<arch>/cups/*.ipk to router

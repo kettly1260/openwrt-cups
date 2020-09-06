@@ -11,6 +11,6 @@ echo "src-git cups https://github.com/fengchen-github/openwrt-cups.git" >> feeds
 
 ./scripts/feeds install -a
 
-make packages/cups/compile V=s
+make package/cups/compile V=s
 
 copy bin/packages/*/cups/*.ipk to router

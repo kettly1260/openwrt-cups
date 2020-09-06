@@ -9,8 +9,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cups
-PKG_VERSION:=2.1.4
-PKG_RELEASE:=1
+PKG_VERSION:=2.3.3
+PKG_RELEASE:=a
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source.tar.gz
 PKG_SOURCE_URL:=http://www.cups.org/software/$(PKG_VERSION)
@@ -35,64 +35,6 @@ endef
 
 define Package/cups/description
 	Common UNIX Printing System (daemon)
-endef
-
-define Package/cups/conffiles
-/etc/cups/classes.conf
-/etc/cups/cupsd.conf
-/etc/cups/printers.conf
-endef
-
-define Package/cups-bsd
-$(call Package/cups/Default)
-  SECTION:=net
-  CATEGORY:=Network
-  DEPENDS:=+libcups
-  TITLE:=Common UNIX Printing System - BSD commands (old)
-endef
-
-define Package/cups-bsd/description
-	Common UNIX Printing System - BSD commands (old)
-endef
-
-define Package/cups-client
-$(call Package/cups/Default)
-  SECTION:=net
-  CATEGORY:=Network
-  DEPENDS:=+libcups +libcupsimage +libcupsmime
-  TITLE:=Common UNIX Printing System - Client commands
-endef
-
-define Package/cups-client/conffiles
-/etc/cups/client.conf
-endef
-
-define Package/cups-client/description
-	Common UNIX Printing System - Client commands
-endef
-
-define Package/cups-filters
-$(call Package/cups/Default)
-  SECTION:=net
-  CATEGORY:=Network
-  DEPENDS:=+libcupsimage
-  TITLE:=Common UNIX Printing System - Filter
-endef
-
-define Package/cups-filters/description
-	Common UNIX Printing System - Filter
-endef
-
-define Package/cups-ppdc
-$(call Package/cups/Default)
-  SECTION:=net
-  CATEGORY:=Network
-  DEPENDS:=+libcupsppdc
-  TITLE:=Common UNIX Printing System - PPDC utils
-endef
-
-define Package/cups-ppdc/description
-	Common UNIX Printing System - PPDC utils
 endef
 
 define Package/libcups
@@ -240,74 +182,6 @@ define Package/cups/install
 	chmod 700 $(1)/usr/lib/cups/backend/usb
 endef
 
-define Package/cups-bsd/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/{lprm,lpq,lpr} $(1)/usr/bin/
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/lpc $(1)/usr/sbin/
-endef
-
-define Package/cups-client/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/usr/bin/{lp,cancel,cupstestppd,cupstestdsc} \
-		$(PKG_INSTALL_DIR)/usr/bin/{ipptool,lpoptions,lpstat} \
-		$(1)/usr/bin/
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/usr/sbin/{cupsaccept,cupsaddsmb,cupsfilter} \
-		$(PKG_INSTALL_DIR)/usr/sbin/{lpadmin,lpinfo,lpmove} \
-		$(1)/usr/sbin/
-	(cd $(1)/usr/sbin; ln -sf cupsaccept accept; ln -sf cupsaccept cupsenable; ln -sf cupsaccept cupsdisable; ln -sf cupsaccept reject; ln -sf cupsaccept cupsreject;)
-endef
-
-define Package/cups-filters/install
-	$(INSTALL_DIR) $(1)/usr/lib/cups/filter
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/cups/filter/{commandtops,gziptoany,pstops,rastertoepson,rastertohp,rastertolabel,rastertopwg} \
-		$(1)/usr/lib/cups/filter
-	(cd $(1)/usr/lib/cups/filter; ln -sf rastertolabel rastertodymo;)
-endef
-
-define Package/cups-ppdc/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/usr/bin/{ppdc,ppdhtml,ppdi,ppdmerge,ppdpo} \
-		$(1)/usr/bin/
-endef
-
-define Package/libcups/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcups.so* $(1)/usr/lib/
-endef
-
-define Package/libcupscgi/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupscgi.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsimage/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsimage.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsmime/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsmime.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsppdc/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsppdc.so* $(1)/usr/lib/
-endef
-
-define Build/InstallDev
-	$(INSTALL_DIR) $(2)/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cups-config $(2)/bin/
-	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/cups $(1)/usr/include/
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcups*.so* $(1)/usr/lib/
-endef
 
 $(eval $(call BuildPackage,cups))
 $(eval $(call BuildPackage,libcups))
@@ -315,7 +189,3 @@ $(eval $(call BuildPackage,libcupscgi))
 $(eval $(call BuildPackage,libcupsimage))
 $(eval $(call BuildPackage,libcupsmime))
 $(eval $(call BuildPackage,libcupsppdc))
-$(eval $(call BuildPackage,cups-bsd))
-$(eval $(call BuildPackage,cups-client))
-$(eval $(call BuildPackage,cups-filters))
-$(eval $(call BuildPackage,cups-ppdc))

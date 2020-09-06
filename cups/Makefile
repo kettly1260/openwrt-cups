@@ -14,7 +14,7 @@ PKG_RELEASE:=a
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source.tar.gz
 PKG_SOURCE_URL:=https://github.com/apple/cups/releases/download/v$(PKG_VERSION)
-PKG_MD5SUM:=412434CEEFBDF3EC71BC9188A035F589
+PKG_MD5SUM:=412434ceefbdf3ec71bc9188a035f589
 
 TARGET_LDFLAGS+=-Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 

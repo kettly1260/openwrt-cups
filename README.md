@@ -8,7 +8,9 @@ cd openwrt-sdk
 echo "src-git cups https://github.com/fengchen-github/openwrt-cups.git" >> feeds.conf.default
 
 ./scripts/feeds update -a
+
 ./scripts/feeds install -a
+
 make menuconfig (set Network->Printing->cups as "M")
 
 make package/cups/compile V=s

@@ -39,6 +39,14 @@ define Package/cups/conffiles
 /etc/cups/printers.conf
 endef
 
+define Package/libcups
+$(call Package/cups/Default)
+  SECTION:=libs
+  CATEGORY:=Libraries
+  DEPENDS:=+zlib +libpthread +libpng +libjpeg
+  TITLE:=Common UNIX Printing System - Core library
+endef
+
 define Build/Configure
 	$(call Build/Configure/Default, \
 		--with-cups-user="nobody" \

@@ -7,9 +7,9 @@ cd openwrt-sdk
 
 echo "src-git cups https://github.com/fengchen-github/openwrt-cups.git" >> feeds.conf.default
 
-./scripts/feeds update -a
+./scripts/feeds update cups
 
-./scripts/feeds install -a
+./scripts/feeds install cups
 
 make package/cups/compile V=s
 

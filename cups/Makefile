@@ -134,4 +134,5 @@ endef
 
 
 $(eval $(call BuildPackage,cups))
+$(eval $(call BuildPackage,libcups))
 

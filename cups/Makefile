@@ -222,7 +222,4 @@ $(eval $(call BuildPackage,libcupscgi))
 $(eval $(call BuildPackage,libcupsimage))
 $(eval $(call BuildPackage,libcupsmime))
 $(eval $(call BuildPackage,libcupsppdc))
-$(eval $(call BuildPackage,cups-bsd))
-$(eval $(call BuildPackage,cups-client))
-$(eval $(call BuildPackage,cups-filters))
-$(eval $(call BuildPackage,cups-ppdc))
+

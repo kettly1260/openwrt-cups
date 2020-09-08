@@ -29,7 +29,7 @@ define Package/cups
 $(call Package/cups/Default)
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libcups +libcupsmime +libcupscgi +libcupsppdc +libusb-1.0
+  DEPENDS:=+libcups +libusb-1.0 +libstdcpp
   TITLE:=Common UNIX Printing System (daemon)
 endef
 
@@ -49,53 +49,7 @@ define Package/libcups/description
 	Common UNIX Printing System - Core library
 endef
 
-define Package/libcupscgi
-$(call Package/cups/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libcups
-  TITLE:=Common UNIX Printing System - CGI library
-endef
 
-define Package/libcupscgi/description
-	Common UNIX Printing System - CGI library
-endef
-
-define Package/libcupsimage
-$(call Package/cups/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libcups
-  TITLE:=Common UNIX Printing System - Image library
-endef
-
-define Package/libcupsimage/description
-	Common UNIX Printing System - Image library
-endef
-
-define Package/libcupsmime
-$(call Package/cups/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libcups
-  TITLE:=Common UNIX Printing System - MIME library
-endef
-
-define Package/libcupsmime/description
-	Common UNIX Printing System - MIME library
-endef
-
-define Package/libcupsppdc
-$(call Package/cups/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libcups +libstdcpp
-  TITLE:=Common UNIX Printing System - PPDC library
-endef
-
-define Package/libcupsppdc/description
-	Common UNIX Printing System - PPDC library
-endef
 
 define Build/Configure
 	$(call Build/Configure/Default, \
@@ -197,5 +151,6 @@ define Build/InstallDev
 endef
 
 $(eval $(call BuildPackage,cups))
+$(eval $(call BuildPackage,libcups))
 
 

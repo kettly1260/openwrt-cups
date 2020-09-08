@@ -187,26 +187,6 @@ define Package/libcups/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcups.so* $(1)/usr/lib/
 endef
 
-define Package/libcupscgi/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupscgi.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsimage/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsimage.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsmime/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsmime.so* $(1)/usr/lib/
-endef
-
-define Package/libcupsppdc/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsppdc.so* $(1)/usr/lib/
-endef
-
 define Build/InstallDev
 	$(INSTALL_DIR) $(2)/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cups-config $(2)/bin/
@@ -217,9 +197,5 @@ define Build/InstallDev
 endef
 
 $(eval $(call BuildPackage,cups))
-$(eval $(call BuildPackage,libcups))
-$(eval $(call BuildPackage,libcupscgi))
-$(eval $(call BuildPackage,libcupsimage))
-$(eval $(call BuildPackage,libcupsmime))
-$(eval $(call BuildPackage,libcupsppdc))
+
 

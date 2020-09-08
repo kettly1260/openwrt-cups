@@ -29,26 +29,13 @@ define Package/cups
 $(call Package/cups/Default)
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libcups +libusb-1.0 +libstdcpp
+  DEPENDS:=+libusb-1.0 +libstdcpp +zlib +libpthread +libpng +libjpeg
   TITLE:=Common UNIX Printing System (daemon)
 endef
 
 define Package/cups/description
 	Common UNIX Printing System (daemon)
 endef
-
-define Package/libcups
-$(call Package/cups/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+zlib +libpthread +libpng +libjpeg
-  TITLE:=Common UNIX Printing System - Core library
-endef
-
-define Package/libcups/description
-	Common UNIX Printing System - Core library
-endef
-
 
 
 define Build/Configure
@@ -136,11 +123,6 @@ define Package/cups/install
 	chmod 700 $(1)/usr/lib/cups/backend/usb
 endef
 
-define Package/libcups/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcups.so* $(1)/usr/lib/
-endef
-
 define Build/InstallDev
 	$(INSTALL_DIR) $(2)/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cups-config $(2)/bin/
@@ -151,6 +133,4 @@ define Build/InstallDev
 endef
 
 $(eval $(call BuildPackage,cups))
-$(eval $(call BuildPackage,libcups))
-
 

@@ -79,7 +79,6 @@ define Build/Configure
 		--disable-gssapi \
 		--disable-tiff, \
 		UNAME="Linux" \
-		LIBS="$(TARGET_LDFLAGS) -lz -lpng -ljpeg" \
 	)
 endef
 

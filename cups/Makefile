@@ -29,7 +29,7 @@ define Package/cups
 $(call Package/cups/Default)
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libcups +libusb-1.0 +libstdcpp
+  DEPENDS:=+libcups +libusb-1.0
   TITLE:=Common UNIX Printing System (daemon)
 endef
 
@@ -41,7 +41,7 @@ define Package/libcups
 $(call Package/cups/Default)
   SECTION:=libs
   CATEGORY:=Libraries
-  DEPENDS:=+zlib +libpthread +libpng +libjpeg
+  DEPENDS:=+zlib
   TITLE:=Common UNIX Printing System - Core library
 endef
 

@@ -5,7 +5,7 @@ tar vxJf sdk.tar.xz
 
 cd openwrt-sdk
 
-echo "src-git cups https://github.com/fengchen-github/openwrt-cups.git" >> feeds.conf.default
+echo "src-git cups https://github.com/kettly1260/openwrt-cups.git" >> feeds.conf.default
 
 ./scripts/feeds update -a
 
